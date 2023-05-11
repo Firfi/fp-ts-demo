@@ -20,7 +20,7 @@ const blah2 = (x: number) => pipe(x, x => add(x, 1), square, x => divide(x, 2), 
 
 // lambda calculus: every function has 1 argument and returns 1 result
 
-const addC = (b: number) => (a: number): number => add(a, b);
+export const addC = (b: number) => (a: number): number => add(a, b);
 const squareC = (a: number): number => square(a);
 const multiplyC = (b: number) => (a: number): number => multiply(a, b);
 const divideC = (b: number) => (a: number): number => divide(a, b);
