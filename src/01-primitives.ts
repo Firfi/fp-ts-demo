@@ -45,7 +45,7 @@ import * as A from 'fp-ts/lib/Array';
 // Monoid is actually your Reduce
 const getSumWithReduce = (keys: string[]) => pipe(keys, A.map(get), A.reduce(ONSumMonoid.empty, ONSumMonoid.concat));
 
-getSumWithReduce(['foo', 'foo', 'foo', 'foo', 'foo']); // Some(5)
+getSumWithReduce(['foo', 'foo', 'foo', 'foo', 'foo']); // Some(104)
 getSumWithReduce(['foo', 'foo', 'foo', 'foo', 'bar']); // None; 'bar' spoils everything!!!
 
 const getSum = (keys: string[]) => A.foldMap(ONSumMonoid)(get)(keys);
@@ -55,11 +55,8 @@ const getSum_ = A.foldMap(ONSumMonoid)(get);
 
 import * as E from 'fp-ts/lib/Either';
 import * as NEA from 'fp-ts/lib/NonEmptyArray';
-import { getApplicativeMonoid } from 'fp-ts/Applicative';
 import { Semigroup } from 'fp-ts/Semigroup';
 import { Either } from 'fp-ts/Either';
-import { Monoid } from 'fp-ts/Monoid';
-import { identity } from 'fp-ts';
 
 const divide = (b: number) => (a: number): E.Either<string, number> => {
   if (b === 0) return E.left('cannot divide by zero');
@@ -92,7 +89,7 @@ export const runDivision = makeRunDivision(ENDivSemigroup);
 // it becomes much more powerful when instead of "string" our error branch is a tagged union of errors
 
 export class NumberParseError extends Error {
-  static _tag: 'NumberParseError'
+  _tag = 'NumberParseError' as const
 }
 
 // without it we have NaNs flying around the system
@@ -104,7 +101,7 @@ const parseNumber = (s: string): E.Either<NumberParseError, number> => {
 }
 
 export class DivisionByZeroError extends Error {
-  static _tag: 'DivisionByZeroError'
+  _tag = 'DivisionByZeroError' as const
 }
 
 // use Reader to reuse the 'divide' function

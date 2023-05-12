@@ -7,17 +7,17 @@ import { pipe } from 'fp-ts/lib/function';
 import { TaskEither } from 'fp-ts/TaskEither';
 
 class Error1 extends Error {
-  static _tag = 'Error1';
+  _tag = 'Error1' as const;
 }
 
 class Error2 extends Error {
-  static _tag = 'Error2';
+  _tag = 'Error2' as const;
 }
 
 type Error3 = Error1 | Error2;
 
 class Error4 extends Error {
-  static _tag = 'Error4';
+  _tag = 'Error4' as const;
 }
 
 type Error5 = Error3 | Error4;

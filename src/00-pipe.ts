@@ -16,7 +16,8 @@ const blah1 = (x: number) => negate(add(multiply(square(add(x, 1)), 0.5), -1));
 
 import { flow, pipe } from 'fp-ts/lib/function';
 
-const blah2 = (x: number) => pipe(x, x => add(x, 1), square, x => divide(x, 2), negate, x => add(x, -1));
+const blah2 = (x: number): number =>
+  pipe(x, x => add(x, 1), square, x => divide(x, 2), negate, x => add(x, -1));
 
 // lambda calculus: every function has 1 argument and returns 1 result
 
